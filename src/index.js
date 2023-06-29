@@ -4,7 +4,7 @@ import { unified } from "unified";
 import { visit } from "unist-util-visit";
 
 export const input = options => tree => {
-    visit(tree, { tagName: "input" }, (node, _, __) => {
+    visit(tree, { tagName: "input" }, node => {
         const { name } = node.properties;
         const value = options[name];
         node.properties.value = value;

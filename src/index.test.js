@@ -6,6 +6,6 @@ test("works", async () => {
         key1: "value1"
     };
     const file = await read("demo.html");
-    const res = await base.use(input, data).process(file);
+    const res = base.use(input, data).process(file);
     console.log(res);
 });
