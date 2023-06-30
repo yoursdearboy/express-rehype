@@ -30,10 +30,22 @@ test("input number", async () => {
     const value = 42;
     const data = { key: value };
     const result = await processor().data(data).process(_input);
-    const result = await unified()
-        .use(base)
-        .use(input, { format: "dd/MM/yyyy" })
-        .data(data)
-        .process(_input);
+    expect(result.value).toEqualIgnoringWhitespace(output);
+});
+
+test("select ", async () => {
+    const _input = '<select name="key">' +
+        '<option value="1">One</option>' +
+        '<option value="2">Two</option>' +
+        '<option value="3">Three</option>' +
+        "</select>";
+    const output = '<select name="key">' +
+        '<option value="1">One</option>' +
+        '<option value="2" selected>Two</option>' +
+        '<option value="3">Three</option>' +
+        "</select>";
+    const value = "2";
+    const data = { key: value };
+    const result = await processor().data(data).process(_input);
     expect(result.value).toEqualIgnoringWhitespace(output);
 });
