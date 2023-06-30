@@ -1,6 +1,5 @@
-import rehypeParse from "rehype-parse";
-import rehypeStringify from "rehype-stringify";
 import { unified } from "unified";
+import { base } from ".";
 import input from "./input";
 
 test("input", async () => {
@@ -8,8 +7,7 @@ test("input", async () => {
     const output = '<input type="text" name="key" value="value">';
     const data = { key: "value" };
     const result = await unified()
-        .use(rehypeParse, { fragment: true })
-        .use(rehypeStringify)
+        .use(base)
         .use(input)
         .data(data)
         .process(_input);

@@ -5,10 +5,16 @@ import input from "./input";
 import layout from "./layout";
 import replace from "./replace";
 
-export default {
+export const base = {
     plugins: [
         [rehypeParse, { fragment: true }],
-        rehypeStringify,
+        rehypeStringify
+    ]
+};
+
+export default {
+    plugins: [
+        base,
         include,
         input,
         layout,
