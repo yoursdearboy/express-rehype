@@ -10,5 +10,5 @@ export default function replace() {
             const res = this.parse(part);
             parent.children[parent.children.indexOf(node)] = res;
         });
-    }
+    };
 }

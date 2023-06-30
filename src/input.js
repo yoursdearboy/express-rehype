@@ -9,5 +9,5 @@ export default function input(options) {
             const value = data[name];
             node.properties.value = format(value, options);
         });
-    }
+    };
 }

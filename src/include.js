@@ -10,5 +10,5 @@ export default function include() {
             const res = this.parse(part);
             node.children = res.children;
         });
-    }
+    };
 }

@@ -11,5 +11,5 @@ export default function layout() {
             const res = proc.runSync(proc.parse(layout));
             parent.children = res.children;
         });
-    }
+    };
 }
