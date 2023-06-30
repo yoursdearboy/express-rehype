@@ -49,3 +49,12 @@ test("select ", async () => {
     const result = await processor().data(data).process(_input);
     expect(result.value).toEqualIgnoringWhitespace(output);
 });
+
+test("textarea", async () => {
+    const _input = '<textarea name="key"></textarea>';
+    const output = '<textarea name="key">Ohayo</textarea>';
+    const value = "Ohayo";
+    const data = { key: value };
+    const result = await processor().data(data).process(_input);
+    expect(result.value).toEqualIgnoringWhitespace(output);
+});

@@ -5,17 +5,23 @@ import { eqProperty } from "./utils";
 export default function input(options) {
     const data = this.data();
 
+    const get = node => data[node.properties.name];
+    const value = node => format(get(node), options);
+
     return tree => {
         visit(tree, { tagName: "input" }, node => {
-            const { name } = node.properties;
-            const value = format(data[name], options);
-            node.properties.value = value;
+            node.properties.value = value(node);
+        });
+
+        visit(tree, { tagName: "textarea" }, node => {
+            node.children = [{
+                type: "text",
+                value: value(node)
+            }];
         });
 
         visit(tree, { tagName: "select" }, node => {
-            const { name } = node.properties;
-            const value = format(data[name]);
-            visit(node, eqProperty("value", value), option => {
+            visit(node, eqProperty("value", value(node)), option => {
                 option.properties.selected = true;
             });
         });
