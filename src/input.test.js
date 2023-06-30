@@ -10,7 +10,8 @@ test("input", async () => {
     const result = await unified()
         .use(rehypeParse, { fragment: true })
         .use(rehypeStringify)
-        .use(input, data)
+        .use(input)
+        .data(data)
         .process(_input);
     expect(result.value).toEqualIgnoringWhitespace(output);
 });

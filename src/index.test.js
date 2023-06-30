@@ -14,9 +14,10 @@ test("works", async () => {
     .use(rehypeParse, { fragment: true })
     .use(rehypeStringify)
     .use(include)
-    .use(input, data)
+    .use(input)
     .use(layout)
     .use(replace)
+    .data(data)
     .process(_input);
     expect(result.value).toEqualIgnoringWhitespace(output.value);
 });
