@@ -5,6 +5,8 @@ export default function format(x, {
 } = {}) {
     if (x instanceof Date) {
         x = date.format(x, format);
+    } else if (typeof x === "number") {
+        x = x.toString();
     }
 
     return x;
