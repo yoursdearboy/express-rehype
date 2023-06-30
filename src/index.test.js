@@ -1,12 +1,22 @@
+import rehypeParse from "rehype-parse";
+import rehypeStringify from "rehype-stringify";
 import { read } from "to-vfile";
-import { base, include, input, layout, replace } from "./index";
+import { unified } from "unified";
+import { include, input, layout, replace } from ".";
 
 test("works", async () => {
     const data = {
-        key1: "value1"
+        key: "value"
     };
-    const file = await read("src/__tests__/input.html");
-    const expected = await read("src/__tests__/output.html", "utf8");
-    const result = await base.use(include).use(input, data).use(layout).use(replace).process(file);
-    expect(result.value).toEqualIgnoringWhitespace(expected.value);
+    const _input = await read("views/preset/input.html");
+    const output = await read("views/preset/output.html", "utf8");
+    const result = await unified()
+    .use(rehypeParse, { fragment: true })
+    .use(rehypeStringify)
+    .use(include)
+    .use(input, data)
+    .use(layout)
+    .use(replace)
+    .process(_input);
+    expect(result.value).toEqualIgnoringWhitespace(output.value);
 });
