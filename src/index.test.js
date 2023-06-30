@@ -1,8 +1,6 @@
-import rehypeParse from "rehype-parse";
-import rehypeStringify from "rehype-stringify";
 import { read } from "to-vfile";
 import { unified } from "unified";
-import { include, input, layout, replace } from ".";
+import preset from ".";
 
 test("works", async () => {
     const data = {
@@ -11,13 +9,8 @@ test("works", async () => {
     const _input = await read("views/preset/input.html");
     const output = await read("views/preset/output.html", "utf8");
     const result = await unified()
-    .use(rehypeParse, { fragment: true })
-    .use(rehypeStringify)
-    .use(include)
-    .use(input)
-    .use(layout)
-    .use(replace)
-    .data(data)
-    .process(_input);
+        .use(preset)
+        .data(data)
+        .process(_input);
     expect(result.value).toEqualIgnoringWhitespace(output.value);
 });
