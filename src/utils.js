@@ -12,6 +12,14 @@ export function hasProperty(prop) {
     };
 }
 
+export function hasPropertyStartsWith(prop) {
+    return node => {
+        return Object
+            .keys(node.properties || {})
+            .some(s => s.startsWith(prop));
+    }
+};
+
 /*
  * Merge nodes by id.
  */
