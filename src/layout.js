@@ -4,12 +4,12 @@ import { hasProperty, merge } from "./utils";
 
 export default function layout() {
     return tree => {
-        visit(tree, hasProperty("re:layout"), (node, _, parent) => {
+        visit(tree, hasProperty("re:layout"), node => {
             const path = node.properties["re:layout"];
             const layout = readSync(path);
             const proc = this().use(merge, node);
             const res = proc.runSync(proc.parse(layout));
-            parent.children = res.children;
+            tree.children = res.children;
         });
     };
 }

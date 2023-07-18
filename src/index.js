@@ -10,7 +10,7 @@ import text from "./text";
 
 export const base = {
     plugins: [
-        [rehypeParse, { fragment: true }],
+        rehypeParse,
         rehypeStringify
     ]
 };

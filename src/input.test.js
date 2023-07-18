@@ -2,6 +2,12 @@ import { unified } from "unified";
 import { base } from ".";
 import input from "./input";
 
+const settings = {
+    settings: {
+        fragment: true
+    }
+};
+
 const processor = unified()
     .use(base)
     .use(input, { format: "dd/MM/yyyy" });
@@ -11,7 +17,7 @@ test("input", async () => {
     const output = '<input type="text" name="key" value="value">';
     const value = "value";
     const data = { key: value };
-    const result = await processor().data(data).process(_input);
+    const result = await processor().data(data).use(settings).process(_input);
     expect(result.value).toEqualIgnoringWhitespace(output);
 });
 
@@ -20,7 +26,7 @@ test("input date", async () => {
     const output = '<input type="text" name="key" value="01/02/2000">';
     const value = new Date(Date.parse("2000-02-01"));
     const data = { key: value };
-    const result = await processor().data(data).process(_input);
+    const result = await processor().data(data).use(settings).process(_input);
     expect(result.value).toEqualIgnoringWhitespace(output);
 });
 
@@ -29,7 +35,7 @@ test("input number", async () => {
     const output = '<input type="text" name="key" value="42">';
     const value = 42;
     const data = { key: value };
-    const result = await processor().data(data).process(_input);
+    const result = await processor().data(data).use(settings).process(_input);
     expect(result.value).toEqualIgnoringWhitespace(output);
 });
 
@@ -46,7 +52,7 @@ test("select ", async () => {
         "</select>";
     const value = "2";
     const data = { key: value };
-    const result = await processor().data(data).process(_input);
+    const result = await processor().data(data).use(settings).process(_input);
     expect(result.value).toEqualIgnoringWhitespace(output);
 });
 
@@ -55,6 +61,6 @@ test("textarea", async () => {
     const output = '<textarea name="key">Ohayo</textarea>';
     const value = "Ohayo";
     const data = { key: value };
-    const result = await processor().data(data).process(_input);
+    const result = await processor().data(data).use(settings).process(_input);
     expect(result.value).toEqualIgnoringWhitespace(output);
 });
