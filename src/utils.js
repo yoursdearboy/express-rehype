@@ -1,3 +1,4 @@
+import path from "path";
 import { visit } from "unist-util-visit";
 
 export function eqProperty(prop, value) {
@@ -17,8 +18,8 @@ export function hasPropertyStartsWith(prop) {
         return Object
             .keys(node.properties || {})
             .some(s => s.startsWith(prop));
-    }
-};
+    };
+}
 
 /*
  * Merge nodes by id.
@@ -37,4 +38,8 @@ export function evalWith(code, context) {
     const values = Object.values(context);
     const fun = eval(`(${args.join(",")}) => ${code};`);
     return fun.apply(null, values);
+}
+
+export function findFile(relativePath, relative) {
+    return path.join(relative.cwd, relativePath);
 }
