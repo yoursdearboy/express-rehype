@@ -1,5 +1,6 @@
 import rehypeParse from "rehype-parse";
 import rehypeStringify from "rehype-stringify";
+import attr from "./attr";
 import cond from "./if";
 import include from "./include";
 import input from "./input";
@@ -24,6 +25,7 @@ export default {
         layout,
         loop,
         replace,
-        text
+        text,
+        attr
     ]
 };

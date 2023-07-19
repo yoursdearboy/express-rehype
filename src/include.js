@@ -9,6 +9,7 @@ export default function include() {
             const part = readSync(findFile(path, doc));
             const res = this.parse(part);
             node.children = res.children;
+            delete node.properties["re:include"];
         });
     };
 }

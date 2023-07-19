@@ -9,6 +9,7 @@ export default function replace() {
             const part = readSync(findFile(path, doc));
             const res = this.parse(part);
             parent.children[parent.children.indexOf(node)] = res;
+            delete node.properties["re:replace"];
         });
     };
 }

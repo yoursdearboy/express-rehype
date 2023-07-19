@@ -7,6 +7,8 @@ export default function layout() {
         visit(tree, hasProperty("re:layout"), node => {
             const path = node.properties["re:layout"];
             const layout = readSync(findFile(path, doc));
+            // delete before merge
+            delete node.properties["re:layout"];
             const proc = this().use(merge, node);
             const res = proc.runSync(proc.parse(layout));
             tree.children = res.children;
